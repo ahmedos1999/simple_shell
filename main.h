@@ -13,7 +13,11 @@
 #include <errno.h>
 
 #define W_BUFF_SIZE 1024
+#define R_BUFF_SIZE 1024
 #define BUFF_FLUSH -1
+
+#define USE_GETLINE 0
+
 
 
 
@@ -71,6 +75,10 @@ typedef struct passinfo
 	char **environ;
 	int env_changed;
 	int status;
+	char **cmd_buf;
+	int cmd_buf_type;
+	int readfd;
+	int histcount;
 }info_t;
 
 #define INFO_INIT \
@@ -93,32 +101,83 @@ typedef struct builtin
 void execmd(char **argv);
 char *get_location(char *command);
 
+
+/**** Main ****/
+int simple_shell(info_t *, char **);
+void fork_cmd(info_t *);
+
+/*** Chain ***/
+int is_chain(info_t *, char *, size_t *);
+void check_chain(info_t *, char *, size_t *, size_t , size_t );
+ssize_t chain_buff(info_t *, char **, size_t *);
+
+/*** Find ***/
+int find_builtin(info_t *);
+void find_cmd(info_t *);
+char *find_path(info_t *, char *, char *);
+
+/*** Helpers ***/
+int interactive(info_t *);
+int is_delim(char , char *);
+int _isalpha(int );
+int is_cmd(info_t *, char *);
+char *dup_chars(char *, int, int);
+char *start_s_with(const char *, const char *);
+
+/*** Environ Functions ***/
+int env_list(info_t *);
+char **get_environ(info_t *);
+char *get_env(info_t *, const char *);
+
 /** Built In Commands **/
-int change_dir(char **argv);
-int _help(char **argv);
-int my_exit(char **argv);
-int (*check_builtn(char *string))(char **argv);
+int my_exit(info_t *);
+int my_help(info_t *);
+
+/*** INPUT  ***/
+ssize_t read_buffer(info_t *, char *, size_t *);
+int line_input(info_t *, char **, size_t *);
+void signal_handler(__attribute__((unused))int );
+ssize_t get_input(info_t *);
+
+/*** Info Struct Initialization Functions ***/
+void clear_info(info_t *);
+void set_info(info_t *, char **);
+void free_info(info_t *, int);
 
 /*** Singly Linked Lists Functions ***/
-list_t *new_node(list_t **head, const char *str, int num);
-list_t *add_node_tail(list_t **head, const char *str, int num);
-int delete_node_at_index(list_t **head, unsigned int index);
+list_t *new_node(list_t **, const char *, int);
+list_t *add_node_tail(list_t **, const char *, int);
+int delete_node_at_index(list_t **, unsigned int);
+size_t len_l(const list_t *);
+char **list_to_strings(list_t *);
 
-/*** Memory Functions***/
-char *_mem_set(char *s, char b, unsigned int n);
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
-int freep(void **ptr);
-void frees(char **pp);
-void freel(list_t **head_ptr);
+/*** Memory Functions ***/
+char *_mem_set(char *, char, unsigned int);
+void *_realloc(void *, unsigned int, unsigned int);
+int freep(void **);
+void frees(char **);
+void freel(list_t **);
 
 /*** String Functions ***/
-char *_strconcat(char *dest, char *src);
-char *string_cpy(char *dest, char *src);
-char *string_dup(const char *str);
-int _strcmp(char *s1, char *s2);
-int _strlen(char *s);
-void put_string(char *str);
-int _putchar(char c);
+char *str_concat(char *, char *);
+char *str_nconcat(char *, char *, int);
+char *str_cpy(char *, char *);
+char *str_ncpy(char *, char *, int);
+char *str_dup(const char *);
+int str_cmp(char *, char *);
+int str_len(char *);
+char *str_char(char *, char);
+void put_str(char *);
+int put_strfd(char *, int);
+int put_char(char);
+int put_fd(char, int);
+
+/*** Tokenizing Functions ***/
+char **str_to_w(char *, char *);
+char **str_to_w2(char *, char );
+
+/*** History Functions ***/
+int build_history_list(info_t *, char *, int);
 
 
 #endif

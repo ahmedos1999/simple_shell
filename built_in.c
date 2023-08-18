@@ -1,0 +1,49 @@
+#include "main.h"
+
+/**
+ * my_exit - exits the shell
+ * @info: Structure containing potential arguments. Used to maintain
+ * constant function prototype.
+ * Return: exits with a given exit status
+ * (0) if info.argv[0] != "exit"
+ **/
+int my_exit(info_t *info)
+{
+	int exitcheck;
+
+	if (info->argv[1])
+	{
+		exitcheck = -1;
+		if (exitcheck == -1)
+		{
+			info->status = 2;
+			/* print_error(info, "Illegal number: "); */
+			put_str(info->argv[1]);
+			put_char('\n');
+			return (1);
+		}
+		/* info->err_num = _erratoi(info->argv[1]); */
+		return (-2);
+	}
+	info->err_num = -1;
+	return (-2);
+}
+
+/**
+ * my_help - show info about a command
+ * @info: Structure containing potential arguments. Used to maintain
+ * constant function prototype.
+ * Return: Always 0
+ **/
+int my_help(info_t *info)
+{
+	char **arg_array;
+
+	arg_array = info->argv;
+	put_str("help call works. Function not yet implemented \n");
+
+	if (0)
+		put_str(*arg_array); /* temp att_unused workaround */
+	return (0);
+
+}
