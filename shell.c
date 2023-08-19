@@ -17,7 +17,7 @@ int simple_shell(info_t *info, char **av)
 		clear_info(info);
 		if (interactive(info))
 			put_str("$ ");
-		putchar(BUFF_FLUSH);
+		put_char(BUFF_FLUSH);
 		r = get_input(info);
 		if (r != -1)
 		{

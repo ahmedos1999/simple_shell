@@ -97,11 +97,6 @@ typedef struct builtin
 	int (*built_in)(info_t *);
 }blt_n;
 
-
-void execmd(char **argv);
-char *get_location(char *command);
-
-
 /**** Main ****/
 int simple_shell(info_t *, char **);
 void fork_cmd(info_t *);
@@ -128,10 +123,12 @@ char *start_s_with(const char *, const char *);
 int env_list(info_t *);
 char **get_environ(info_t *);
 char *get_env(info_t *, const char *);
+int set_env(info_t *, char *, char *);
 
 /** Built In Commands **/
 int my_exit(info_t *);
 int my_help(info_t *);
+int my_cd(info_t *);
 
 /*** INPUT  ***/
 ssize_t read_buffer(info_t *, char *, size_t *);

@@ -18,9 +18,9 @@ int find_builtin(info_t *info)
 		{"help", my_help},
 		/* {"history", my_history},
 		{"setenv", my_setenv},
-		{"unsetenv", my_unsetenv},
+		{"unsetenv", my_unsetenv},*/
 		{"cd", my_cd},
-		{"alias", my_alias},*/
+		/*{"alias", my_alias},*/
 		{NULL, NULL}
 	};
 	for (i = 0; builtintable[i].f; i++)
@@ -31,8 +31,6 @@ int find_builtin(info_t *info)
 			built_in_ret = builtintable[i].built_in(info);
 			break;
 		}
-
-
 	}
 return (built_in_ret);
 }

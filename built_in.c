@@ -47,3 +47,46 @@ int my_help(info_t *info)
 	return (0);
 
 }
+
+/**
+ * my_cd - changes the current directory of the process
+ * @info: Structure containing potential arguments. Used to maintain
+ * constant function prototype.
+ * Return: Always 0
+ **/
+int my_cd(info_t *info)
+{
+	char *s, *dir, buffer[1024];
+	int chdir_ret;
+
+	s = getcwd(buffer, 1024);
+	if (!info->argv[1])
+	{
+		dir = get_env(info, "HOME=");
+		if (!dir)
+		{
+			chdir_ret = chdir((dir = get_env(info, "PWD=")) ? dir : "/");
+		}
+		else
+		{
+			chdir_ret = chdir(dir);
+		}
+	}
+	else if (str_cmp(info->argv[1], "-") == 0)
+	{
+		if (!get_env(info, "OLDPWD="))
+		{
+			put_str(s);
+			put_char('\n');
+			return (1);
+		}
+		put_str(get_env(info, "OLDPWD=")), put_char('\n');
+		chdir_ret = chdir((dir = get_env(info, "OLDPWD=")) ? dir : "/");
+	}
+	else
+	{
+		set_env(info, "OLDPWD", get_env(info, "PWD="));
+		set_env(info, "PWD", getcwd(buffer, 1024));
+	}
+return (0);
+}
