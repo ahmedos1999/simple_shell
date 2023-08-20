@@ -28,7 +28,7 @@ int simple_shell(info_t *info, char **av)
 		}
 		else if (interactive(info))
 			put_char('\n');
-		free_info(info, 0);
+		/*free_info(info, 0);*/
 	}
 	/* write_history(info); */
 	free_info(info, 1);

@@ -1,0 +1,59 @@
+main
+{
+	1-env_list
+	{
+		add_node_tail
+	}
+	3-read_history /*not yet implemented*/
+	2-simple_shell
+	{
+		a-clear_info
+		b-interactive
+		{
+			1-isatty
+		}
+		c-get_input
+		{
+			1-chain_buff
+			{
+				1-signal (signal_handler)
+				2-getline
+				3-line_input
+				{
+					a-read_buffer
+					{
+						I-read
+					}
+					b-_realloc
+					{
+						I-malloc
+						II-free
+					}
+				}
+				4-build_history_list
+				{
+					a-add_node_tail
+				}
+			}
+			2-check_chain
+			3-is_chain
+		}
+		d-set_info
+		{
+			1-str_to_w
+			2-malloc
+			3-str_dup
+			/*4-replace_alias*/
+			/*5-replace_vars */
+		}
+		e-find_builtin
+		{
+			1-my_exit
+				{
+					
+				}
+			2-my_help
+			3-my_cd
+		}
+	}
+}
