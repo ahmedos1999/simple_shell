@@ -61,7 +61,7 @@ void free_info(info_t *info, int all)
 		if (info->alias)
 			freel(&(info->alias));
 		frees(info->environ);
-		info->environ = NULL;
+			info->environ = NULL;
 		freep((void **)info->cmd_buf);
 		if (info->readfd > 2)
 			close(info->readfd);

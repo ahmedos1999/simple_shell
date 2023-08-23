@@ -25,11 +25,11 @@ void frees(char **pp)
 {
 	char **a = pp;
 
-	if (!a)
+	if (!pp)
 		return;
 
-	while (*a)
-		free(*a++);
+	while (*pp)
+		free(*pp++);
 
 	free(a);
 }
