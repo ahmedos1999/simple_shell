@@ -17,7 +17,7 @@ int simple_shell(info_t *info, char **av)
 		clear_info(info);
 		if (interactive(info))
 			put_str("$ ");
-		put_char(BUFF_FLUSH);
+		_eputchar(BUFF_FLUSH);
 		r = get_input(info);
 		if (r != -1)
 		{
@@ -28,9 +28,7 @@ int simple_shell(info_t *info, char **av)
 		}
 		else if (interactive(info))
 			put_char('\n');
-		/*free_info(info, 0);*/
 	}
-	/* write_history(info); */
 	free_info(info, 1);
 	if (!interactive(info) && info->status)
 		exit(info->status);
