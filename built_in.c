@@ -11,9 +11,9 @@ int my_exit(info_t *info)
 {
 	if (str_cmp(info->argv[0], "exit") == 0)
 	{
-		printf("exiting shell....\n");
 		exit(info->status);
 	}
+return (0);
 }
 
 /**
@@ -32,13 +32,13 @@ int statue, i = 0;
 		free(info->argv);
 		exit(EXIT_SUCCESS);
 	}
-
 	while (info->argv[1][i])
 	{
 		statue = _atoi(info->argv[1]);
 		free(info->argv);
 		exit(statue);
 	}
+return (0);
 }
 
 /**
@@ -64,12 +64,15 @@ int my_help(info_t *info)
  * my_cd - changes the current directory of the process
  * @info: Structure containing potential arguments. Used to maintain
  * constant function prototype.
+ *
  * Return: Always 0
  **/
 int my_cd(info_t *info)
 {
 	char *s, *dir, buffer[1024];
 	int chdir_ret;
+
+	(void) chdir_ret;
 
 	s = getcwd(buffer, 1024);
 	if (!info->argv[1])

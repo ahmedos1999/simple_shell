@@ -15,9 +15,6 @@ int find_builtin(info_t *info)
 	blt_n builtintable[] = {
 		{"exit", my_exit2},
 		{"help", my_help},
-		/*{"history", my_history},*/
-		{"setenv", my_setenv},
-		{"unsetenv", my_unsetenv},
 		{"cd", change_dir},
 		{NULL, NULL}
 	};
