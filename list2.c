@@ -1,6 +1,7 @@
 #include "main.h"
 
-/**get_node_index - gets the index of a node
+/**
+ * get_node_index - gets the index of a node
  * @head: pointer to list head
  * @node: pointer to the node
  *

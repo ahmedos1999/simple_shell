@@ -33,7 +33,8 @@ char *get_history_file(info_t *info)
 	directory = get_env(info, "HOME=");
 	if (!directory)
 		return (NULL);
-	buff = malloc(sizeof(char) * (str_len(directory) + str_len(HISTORY_OUTPUT) + 2));
+	buff = malloc(sizeof(char) *
+			(str_len(directory) + str_len(HISTORY_OUTPUT) + 2));
 	if (!buff)
 		return (NULL);
 	buff[0] = 0;

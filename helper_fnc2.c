@@ -71,11 +71,11 @@ return (1);
 }
 
 /**
- *  * replace_alias - replaces an aliases in the tokenized string
- *   * @info: the parameter struct
- *    *
- *     * Return: 1 if replaced, 0 otherwise
- *      */
+ * replace_alias - replaces an aliases in the tokenized string
+ * @info: the parameter struct
+ *
+ * Return: 1 if replaced, 0 otherwise
+ **/
 int replace_alias(info_t *info)
 {
 	int i;
@@ -93,7 +93,7 @@ int replace_alias(info_t *info)
 			return (0);
 		p = str_dup(p + 1);
 		if (!p)
-			return(0);
+			return (0);
 		info->argv[0] = p;
 	}
 return (1);

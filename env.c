@@ -63,8 +63,9 @@ return (NULL);
  * or modify an existing one
  * @info: Structure containing potential arguments. Used to maintain
  * constant function prototype.
- * @var: the string env var property
+ * @name: the string env variable name
  * @value: the string env var value
+ *
  * Return: Always 0
  **/
 int set_env(info_t *info, char *name, char *value)
@@ -105,8 +106,9 @@ int set_env(info_t *info, char *name, char *value)
  * unset_env - Remove an environment variable
  * @info: Structure containing potential arguments. Used to maintain
  * constant function prototype.
+ * @name: the string env variable name
+ *
  * Return: 1 on delete, 0 otherwise
- * @name: the string env var property
  **/
 int unset_env(info_t *info, char *name)
 {
@@ -129,5 +131,5 @@ int unset_env(info_t *info, char *name)
 		node = node->next;
 		i++;
 	}
-return(info->env_changed);
+return (info->env_changed);
 }
