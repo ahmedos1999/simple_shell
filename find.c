@@ -14,8 +14,13 @@ int find_builtin(info_t *info)
 	int i, built_in_ret = -1;
 	blt_n builtintable[] = {
 		{"exit", my_exit},
+		{"env", my_env},
 		{"help", my_help},
 		{"cd", my_cd},
+		{"history", my_history},
+		{"setenv", my_set_env},
+		{"unsetenv", my_unset_env},
+		{"alias", my_alias},
 		{NULL, NULL}
 	};
 	for (i = 0; builtintable[i].f; i++)

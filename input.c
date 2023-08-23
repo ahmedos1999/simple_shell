@@ -106,6 +106,7 @@ ssize_t chain_buff(info_t *info, char **buff, size_t *len)
 				r--;
 			}
 			info->linecount_flag = 1;
+			remove_comments(*buff);
 			build_history_list(info, *buff, info->histcount++);
 			*len = r;
 			info->cmd_buf = buff;

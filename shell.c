@@ -29,6 +29,7 @@ int simple_shell(info_t *info, char **av)
 		else if (interactive(info))
 			put_char('\n');
 	}
+	write_to_history(info);
 	free_info(info, 1);
 	if (!interactive(info) && info->status)
 		exit(info->status);
@@ -74,13 +75,7 @@ void fork_cmd(info_t *info)
 		{
 			info->status = WEXITSTATUS(info->status);
 			if (info->status == 126)
-			{
-				put_str(info->fname);
-				put_str(": ");
-				put_str(info->argv[0]);
-				put_str(": ");
-				put_str("Permission denied\n");
-			}
+				print_error(info, "Permission denied\n");
 		}
 	}
 }

@@ -38,6 +38,7 @@ int main(int ac, char **av)
 		info->readfd = fd;
 	}
 	env_list(info);
+	read_from_history(info);
 	simple_shell(info, av);
 	return (EXIT_SUCCESS);
 }

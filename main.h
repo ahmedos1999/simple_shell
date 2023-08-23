@@ -15,9 +15,8 @@
 #define W_BUFF_SIZE 1024
 #define R_BUFF_SIZE 1024
 #define BUFF_FLUSH -1
-
 #define USE_GETLINE 0
-
+#define HISTORY_OUTPUT ".simple_shell_history"
 
 
 
@@ -120,31 +119,35 @@ char *dup_chars(char *, int, int);
 char *start_s_with(const char *, const char *);
 int replace_vars(info_t *);
 int replace_string(char **, char *);
+int _atoi(char *s);
 
-
-/*** Error handeling ***/
-void _eputs(char *str);
-int _eputchar(char c);
-int _putfd(char c, int fd);
-int _putsfd(char *str, int fd);
-int _erratoi(char *s);
-void print_error(info_t *info, char *estr);
-int print_dec(int input, int fd);
-char *convert_number(long int num, int base, int flags);
-void remove_comments(char *buf);
+/*** Error handeling & Printing ***/
+void _eputs(char *);
+int _eputchar(char);
+int _putfd(char, int);
+int _putsfd(char *, int);
+int _erratoi(char *);
+void print_error(info_t *, char *);
+int print_dec(int, int);
+char *convert_number(long int, int, int);
+void remove_comments(char *);
 
 /*** Environ Functions ***/
 int env_list(info_t *);
 char **get_environ(info_t *);
 char *get_env(info_t *, const char *);
 int set_env(info_t *, char *, char *);
+int unset_env(info_t *, char *);
 
 /** Built In Commands **/
 int my_exit(info_t *);
-int my_exit2(info_t *);
+int my_alias(info_t *);
 int my_help(info_t *);
 int my_cd(info_t *);
-int change_dir(info_t *info);
+int my_env(info_t *);
+int my_set_env(info_t *);
+int my_unset_env(info_t *);
+int my_history(info_t *);
 
 /*** INPUT  ***/
 ssize_t read_buffer(info_t *, char *, size_t *);
@@ -164,6 +167,9 @@ int delete_node_at_index(list_t **, unsigned int);
 size_t len_l(const list_t *);
 char **list_to_strings(list_t *);
 list_t *node_starts_with(list_t *, char *, char);
+ssize_t get_node_index(list_t *, list_t *);
+size_t print_list_string(const list_t *);
+size_t list_printer(const list_t *);
 
 /*** Memory Functions ***/
 char *_mem_set(char *, char, unsigned int);
@@ -185,7 +191,7 @@ void put_str(char *);
 int put_strfd(char *, int);
 int put_char(char);
 int put_fd(char, int);
-int _atoi(char *s);
+size_t print_list_string(const list_t *);
 
 /*** Tokenizing Functions ***/
 char **str_to_w(char *, char *);
@@ -193,6 +199,15 @@ char **str_to_w2(char *, char);
 
 /*** History Functions ***/
 int build_history_list(info_t *, char *, int);
+int read_from_history(info_t *);
+int write_to_history(info_t *);
+char *get_history_file(info_t *);
+int renum_hist(info_t *);
 
+
+/*** Alias Functions ***/
+int set_alias(info_t *, char *);
+int unset_alias(info_t *, char *);
+int print_alias(list_t *);
 
 #endif

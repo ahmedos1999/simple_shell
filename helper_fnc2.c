@@ -71,23 +71,30 @@ return (1);
 }
 
 /**
- * node_starts_with - returns node whose string starts with prefix
- * @node: pointer to list head
- * @prefix: string to match
- * @c: the next character after prefix to match
- *
- * Return: match node or null
- **/
-list_t *node_starts_with(list_t *node, char *start, char c)
+ *  * replace_alias - replaces an aliases in the tokenized string
+ *   * @info: the parameter struct
+ *    *
+ *     * Return: 1 if replaced, 0 otherwise
+ *      */
+int replace_alias(info_t *info)
 {
-	char *p = NULL;
-	
-	while (node)
+	int i;
+	list_t *node;
+	char *p;
+
+	for (i = 0; i < 10; i++)
 	{
-		p = start_s_with(node->str, start);
-		if (p && ((c == -1) || (*p == c)))
-			return (node);
-		node = node->next;
+		node = node_starts_with(info->alias, info->argv[0], '=');
+		if (!node)
+			return (0);
+		free(info->argv[0]);
+		p = str_char(node->str, '=');
+		if (!p)
+			return (0);
+		p = str_dup(p + 1);
+		if (!p)
+			return(0);
+		info->argv[0] = p;
 	}
-return (NULL);
+return (1);
 }
