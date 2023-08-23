@@ -118,6 +118,20 @@ int _isalpha(int);
 int is_cmd(info_t *, char *);
 char *dup_chars(char *, int, int);
 char *start_s_with(const char *, const char *);
+int replace_vars(info_t *);
+int replace_string(char **, char *);
+
+
+/*** Error handeling ***/
+void _eputs(char *str);
+int _eputchar(char c);
+int _putfd(char c, int fd);
+int _putsfd(char *str, int fd);
+int _erratoi(char *s);
+void print_error(info_t *info, char *estr);
+int print_dec(int input, int fd);
+char *convert_number(long int num, int base, int flags);
+void remove_comments(char *buf);
 
 /*** Environ Functions ***/
 int env_list(info_t *);
@@ -149,6 +163,7 @@ list_t *add_node_tail(list_t **, const char *, int);
 int delete_node_at_index(list_t **, unsigned int);
 size_t len_l(const list_t *);
 char **list_to_strings(list_t *);
+list_t *node_starts_with(list_t *, char *, char);
 
 /*** Memory Functions ***/
 char *_mem_set(char *, char, unsigned int);

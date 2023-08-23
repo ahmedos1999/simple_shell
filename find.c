@@ -13,9 +13,9 @@ int find_builtin(info_t *info)
 {
 	int i, built_in_ret = -1;
 	blt_n builtintable[] = {
-		{"exit", my_exit2},
+		{"exit", my_exit},
 		{"help", my_help},
-		{"cd", change_dir},
+		{"cd", my_cd},
 		{NULL, NULL}
 	};
 	for (i = 0; builtintable[i].f; i++)
@@ -69,7 +69,7 @@ void find_cmd(info_t *info)
 		else if (*(info->arg) != '\n')
 		{
 			info->status = 127;
-			/*print_error(info, "not found\n");*/
+			print_error(info, "not found\n");
 		}
 	}
 }

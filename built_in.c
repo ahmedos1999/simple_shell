@@ -9,11 +9,24 @@
  **/
 int my_exit(info_t *info)
 {
-	if (str_cmp(info->argv[0], "exit") == 0)
+	int exitcheck;
+
+	if (info->argv[1])
 	{
-		exit(info->status);
+		exitcheck = _erratoi(info->argv[1]);
+		if (exitcheck == -1)
+		{
+			info->status = 2;
+			print_error(info, "Illegal number: ");
+			_eputs(info->argv[1]);
+			_eputchar('\n');
+			return (1);
+		}
+		info->err_num = _erratoi(info->argv[1]);
+		return (-2);
 	}
-return (0);
+	info->err_num = -1;
+return (-2);
 }
 
 /**
@@ -72,20 +85,15 @@ int my_cd(info_t *info)
 	char *s, *dir, buffer[1024];
 	int chdir_ret;
 
-	(void) chdir_ret;
 
 	s = getcwd(buffer, 1024);
 	if (!info->argv[1])
 	{
 		dir = get_env(info, "HOME=");
 		if (!dir)
-		{
 			chdir_ret = chdir((dir = get_env(info, "PWD=")) ? dir : "/");
-		}
 		else
-		{
 			chdir_ret = chdir(dir);
-		}
 	}
 	else if (str_cmp(info->argv[1], "-") == 0)
 	{
@@ -97,6 +105,13 @@ int my_cd(info_t *info)
 		}
 		put_str(get_env(info, "OLDPWD=")), put_char('\n');
 		chdir_ret = chdir((dir = get_env(info, "OLDPWD=")) ? dir : "/");
+	}
+	else
+		chdir_ret = chdir(info->argv[1]);
+	if (chdir_ret == -1)
+	{
+		print_error(info, "can't cd to ");
+		_eputs(info->argv[1]), _eputchar('\n');
 	}
 	else
 	{
@@ -120,12 +135,9 @@ int change_dir(info_t *info)
 	if (info->argv[1] == NULL)
 		value = chdir(getenv("HOME"));
 	else if (str_cmp(info->argv[1], "-") == 0)
-	{
 		value = chdir(getenv("OLDPWD"));
-	}
 	else
 		value = chdir(info->argv[1]);
-
 	if (value == -1)
 	{
 		perror("hsh");

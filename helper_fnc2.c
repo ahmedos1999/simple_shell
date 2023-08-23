@@ -16,3 +16,78 @@ char *start_s_with(const char *hay_stack, const char *ndl)
 	}
 	return ((char *)hay_stack);
 }
+
+/**
+ * replace_vars - replaces vars in the tokenized string
+ * @info: the parameter struct
+ *
+ * Return: 1 if replaced, 0 otherwise
+ **/
+int replace_vars(info_t *info)
+{
+	int i = 0;
+	list_t *node;
+
+	for (i = 0; info->argv[i]; i++)
+	{
+		if (info->argv[i][0] != '$' || !info->argv[i][1])
+			continue;
+
+		if (!str_cmp(info->argv[i], "$?"))
+		{
+			replace_string(&(info->argv[i]),
+					str_dup(convert_number(info->status, 10, 0)));
+			continue;
+		}
+		if (!str_cmp(info->argv[i], "$$"))
+		{
+			replace_string(&(info->argv[i]),
+					str_dup(convert_number(getpid(), 10, 0)));
+			continue;
+		}
+		node = node_starts_with(info->env, &info->argv[i][1], '=');
+		if (node)
+		{
+			replace_string(&(info->argv[i]),
+					str_dup(str_char(node->str, '=') + 1));
+			continue;
+		}
+		replace_string(&info->argv[i], str_dup(""));
+	}
+return (0);
+}
+/**
+ * replace_string - replaces string
+ * @old: address of old string
+ * @new: new string
+ *
+ * Return: 1 if replaced, 0 otherwise
+ **/
+int replace_string(char **old, char *new)
+{
+	free(*old);
+	*old = new;
+return (1);
+}
+
+/**
+ * node_starts_with - returns node whose string starts with prefix
+ * @node: pointer to list head
+ * @prefix: string to match
+ * @c: the next character after prefix to match
+ *
+ * Return: match node or null
+ **/
+list_t *node_starts_with(list_t *node, char *start, char c)
+{
+	char *p = NULL;
+	
+	while (node)
+	{
+		p = start_s_with(node->str, start);
+		if (p && ((c == -1) || (*p == c)))
+			return (node);
+		node = node->next;
+	}
+return (NULL);
+}
