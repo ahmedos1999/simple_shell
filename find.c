@@ -13,13 +13,13 @@ int find_builtin(info_t *info)
 {
 	int i, built_in_ret = -1;
 	blt_n builtintable[] = {
-		{"exit", my_exit},
+		{"exit", my_exit2},
 		/* {"env", my_env}, */
 		{"help", my_help},
 		/* {"history", my_history},
 		{"setenv", my_setenv},
 		{"unsetenv", my_unsetenv},*/
-		{"cd", my_cd},
+		{"cd", change_dir},
 		/*{"alias", my_alias},*/
 		{NULL, NULL}
 	};

@@ -127,8 +127,10 @@ int set_env(info_t *, char *, char *);
 
 /** Built In Commands **/
 int my_exit(info_t *);
+int my_exit2(info_t *);
 int my_help(info_t *);
 int my_cd(info_t *);
+int change_dir(info_t *info);
 
 /*** INPUT  ***/
 ssize_t read_buffer(info_t *, char *, size_t *);
@@ -168,6 +170,7 @@ void put_str(char *);
 int put_strfd(char *, int);
 int put_char(char);
 int put_fd(char, int);
+int _atoi(char *s);
 
 /*** Tokenizing Functions ***/
 char **str_to_w(char *, char *);
