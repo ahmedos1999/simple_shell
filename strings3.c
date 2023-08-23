@@ -10,7 +10,7 @@
  **/
 int put_fd(char c, int fd)
 {
-	static int i = 0;
+	static int i;
 	static char buff[W_BUFF_SIZE];
 
 	if (c == BUFF_FLUSH || i >= W_BUFF_SIZE)
@@ -21,6 +21,13 @@ int put_fd(char c, int fd)
 		buff[i++] = c;
 	return (1);
 }
+
+/**
+ * _atoi - converts string into integers
+ * @s: the string to be converted
+ *
+ * Return: the converted integer value
+**/
 int _atoi(char *s)
 {
 	int i, j, n, x;

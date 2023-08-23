@@ -34,12 +34,12 @@ typedef struct liststr
 	int num;
 	char *str;
 	struct liststr *next;
-}list_t;
+} list_t;
 
 
 /**
  * struct passinfo - contains pseudo-arguements to pass into a function,
- * 	allowing uniform prototype for function pointer struct
+ * allowing uniform prototype for function pointer struct
  * @arg: a string generated from getline containing arguements
  * @argv: an array of strings generated from arg
  * @path: a string path for the current command
@@ -79,7 +79,7 @@ typedef struct passinfo
 	int cmd_buf_type;
 	int readfd;
 	int histcount;
-}info_t;
+} info_t;
 
 #define INFO_INIT \
 {NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
@@ -95,7 +95,7 @@ typedef struct builtin
 {
 	char *f;
 	int (*built_in)(info_t *);
-}blt_n;
+} blt_n;
 
 /**** Main ****/
 int simple_shell(info_t *, char **);
@@ -103,7 +103,7 @@ void fork_cmd(info_t *);
 
 /*** Chain ***/
 int is_chain(info_t *, char *, size_t *);
-void check_chain(info_t *, char *, size_t *, size_t , size_t );
+void check_chain(info_t *, char *, size_t *, size_t, size_t);
 ssize_t chain_buff(info_t *, char **, size_t *);
 
 /*** Find ***/
@@ -113,8 +113,8 @@ char *find_path(info_t *, char *, char *);
 
 /*** Helpers ***/
 int interactive(info_t *);
-int is_delim(char , char *);
-int _isalpha(int );
+int is_delim(char, char *);
+int _isalpha(int);
 int is_cmd(info_t *, char *);
 char *dup_chars(char *, int, int);
 char *start_s_with(const char *, const char *);
@@ -135,7 +135,7 @@ int change_dir(info_t *info);
 /*** INPUT  ***/
 ssize_t read_buffer(info_t *, char *, size_t *);
 int line_input(info_t *, char **, size_t *);
-void signal_handler(__attribute__((unused))int );
+void signal_handler(__attribute__((unused))int);
 ssize_t get_input(info_t *);
 
 /*** Info Struct Initialization Functions ***/
@@ -174,7 +174,7 @@ int _atoi(char *s);
 
 /*** Tokenizing Functions ***/
 char **str_to_w(char *, char *);
-char **str_to_w2(char *, char );
+char **str_to_w2(char *, char);
 
 /*** History Functions ***/
 int build_history_list(info_t *, char *, int);

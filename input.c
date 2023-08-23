@@ -3,7 +3,7 @@
 /**
  * read_buffer - reads a buffer
  * @info: parameter struct
- * @buf: buffer
+ * @buff: buffer
  * @i: size
  *
  * Return: r
@@ -78,7 +78,7 @@ void signal_handler(__attribute__((unused))int signal_num)
 /**
  * chain_buff - buffers chained commands
  * @info: parameter struct
- * @buf: address of buffer
+ * @buff: address of buffer
  * @len: address of len var
  *
  * Return: bytes read

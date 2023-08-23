@@ -4,17 +4,25 @@
  * my_exit - exits the shell
  * @info: Structure containing potential arguments. Used to maintain
  * constant function prototype.
+ *
  * Return: exits with a given exit status
- * (0) if info.argv[0] != "exit"
  **/
 int my_exit(info_t *info)
 {
-	if(str_cmp(info->argv[0],"exit") == 0)
+	if (str_cmp(info->argv[0], "exit") == 0)
 	{
 		printf("exiting shell....\n");
 		exit(info->status);
 	}
 }
+
+/**
+ * my_exit2 - exits the shell
+ * @info: Structure containing potential arguments. Used to maintain
+ * constant function prototype.
+ *
+ * Return: exits with a given exit status
+ **/
 int my_exit2(info_t *info)
 {
 int statue, i = 0;
@@ -24,11 +32,12 @@ int statue, i = 0;
 		free(info->argv);
 		exit(EXIT_SUCCESS);
 	}
+
 	while (info->argv[1][i])
 	{
-			statue = _atoi(info->argv[1]);
-			free(info->argv);
-			exit(statue);
+		statue = _atoi(info->argv[1]);
+		free(info->argv);
+		exit(statue);
 	}
 }
 
@@ -95,11 +104,11 @@ return (0);
 }
 
 /**
- *  * change_dir - Change Dirctorie
- *   * @cmd: Parsed Command
- *    * @er: Statue Last Command Excuted
- *     * Return: 0 Succes 1 Failed (For Old Pwd Always 0 Case No Old PWD)
- *      */
+ * change_dir - Change Dirctorie
+ * @info: Structure for carrying path
+ *
+ * Return: 0 Succes 1 Failed (For Old Pwd Always 0 Case No Old PWD)
+ **/
 int change_dir(info_t *info)
 {
 	int value = -1;

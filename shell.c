@@ -52,7 +52,7 @@ int simple_shell(info_t *info, char **av)
 void fork_cmd(info_t *info)
 {
 	pid_t child_pid;
-	
+
 	child_pid = fork();
 	if (child_pid == -1)
 	{

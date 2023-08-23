@@ -3,7 +3,7 @@
 /**
  * start_s_with - checks if needle starts with haystack
  * @hay_stack: string to search
- * @needle: the substring to find
+ * @ndl: the substring to find
  *
  * Return: address of next char of haystack or NULL
  **/

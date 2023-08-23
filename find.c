@@ -14,13 +14,11 @@ int find_builtin(info_t *info)
 	int i, built_in_ret = -1;
 	blt_n builtintable[] = {
 		{"exit", my_exit2},
-		/* {"env", my_env}, */
 		{"help", my_help},
-		/* {"history", my_history},
+		/*{"history", my_history},*/
 		{"setenv", my_setenv},
-		{"unsetenv", my_unsetenv},*/
+		{"unsetenv", my_unsetenv},
 		{"cd", change_dir},
-		/*{"alias", my_alias},*/
 		{NULL, NULL}
 	};
 	for (i = 0; builtintable[i].f; i++)
@@ -80,13 +78,13 @@ void find_cmd(info_t *info)
 }
 
 /**
- *  * find_path - finds this cmd in the PATH string
- *   * @info: the info struct
- *    * @pathstr: the PATH string
- *     * @cmd: the cmd to find
- *      *
- *       * Return: full path of cmd if found or NULL
- *        */
+ * find_path - finds this cmd in the PATH string
+ * @info: the info struct
+ * @path_str: the PATH string
+ * @cmd: the cmd to find
+ *
+ * Return: full path of cmd if found or NULL
+ **/
 char *find_path(info_t *info, char *path_str, char *cmd)
 {
 	int i = 0, c_pos = 0;

@@ -12,7 +12,6 @@ int str_len(char *s)
 
 	if (!s)
 		return (0);
-	
 	while (*s++)
 		i++;
 	return (i);
@@ -101,7 +100,6 @@ char *str_dup(const char *str)
 
 	while (*str++)
 		str_l++;
-	
 	temp = malloc(sizeof(char) * (str_l + 1));
 	if (!temp)
 		return (NULL);
