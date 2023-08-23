@@ -12,13 +12,12 @@
 #include <fcntl.h>
 #include <errno.h>
 
-#define W_BUFF_SIZE 1024
-#define R_BUFF_SIZE 1024
-#define BUFF_FLUSH -1
-#define USE_GETLINE 0
-#define HISTORY_OUTPUT ".simple_shell_history"
+#define W_BUFF_SIZE	1024
+#define R_BUFF_SIZE	1024
+#define BUFF_FLUSH	-1
+#define USE_GETLINE	0
 
-
+#define HISTORY_OUT	".simple_shell_history"
 
 extern char **environ;
 

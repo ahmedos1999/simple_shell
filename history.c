@@ -20,6 +20,7 @@ int build_history_list(info_t *info, char *buff, int linecount)
 	return (0);
 
 }
+
 /**
  * get_history_file - gets the history file
  * @info: parameter struct
@@ -33,14 +34,13 @@ char *get_history_file(info_t *info)
 	directory = get_env(info, "HOME=");
 	if (!directory)
 		return (NULL);
-	buff = malloc(sizeof(char) *
-			(str_len(directory) + str_len(HISTORY_OUTPUT) + 2));
+	buff = malloc(sizeof(char) * (str_len(directory) + str_len(HISTORY_OUT) + 2));
 	if (!buff)
 		return (NULL);
 	buff[0] = 0;
 	str_cpy(buff, directory);
 	str_concat(buff, "/");
-	str_concat(buff, HISTORY_OUTPUT);
+	str_concat(buff, HISTORY_OUT);
 return (buff);
 }
 
